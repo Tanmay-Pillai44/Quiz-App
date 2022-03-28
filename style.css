@@ -110,6 +110,19 @@ body {
     transform: translate(-50%, -50%) scale(0.9);
 }
 
+#highScoresList {
+    display: table;
+    margin: 10px auto;
+    margin-top: 20px;
+    list-style-type: decimal;
+}
+
+#highScoresList li {
+    font-size: 21px;
+    margin: 12px 0;
+    color: #ae1f79;
+    font-weight: bold;
+}
 
 #finalScore {
     margin-left: 25%;
@@ -134,6 +147,16 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.clear-highScores {
+    color: #ae1f79;
+    padding: 10px;
+}
+
+.clear-highScores:hover {
+    color: #f4edd8;
+    background-color: #ae1f79;
 }
 
 .go-home {

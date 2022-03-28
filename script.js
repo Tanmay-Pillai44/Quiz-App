@@ -13,7 +13,7 @@ const leaderboard = document.querySelector(".leaderboard");
 const highscore_box = document.querySelector(".highScore-box");
 const highScoresList = document.querySelector("#highScoresList");
 const go_home_btn = document.querySelector(".go-home");
-const clear_highscores_btn = document.querySelector(".clear-highscores");
+const clear_highscores_btn = document.getElementById("clear-highscores");
 const username = document.getElementById("username");
 const saveScoreBtn = document.getElementById("saveScoreBtn");
 
@@ -39,8 +39,11 @@ const quit_quiz = result_box.querySelector(".buttons .quit");
 leaderboard.onclick = () => {
     highscore_box.classList.add("activehighScore");
     highScoresList.innerHTML = highScores.map(score => {
-        return `<li class="high-score">${score.name} - ${score.score}</li>`;
+        return `<li class="high-score">${score.name} - ${score.score} / ${questions.length}</li>`;
     }).join("");
+    rule_box.classList.remove("activeInfo"); // hide the rule box
+    question_box.classList.remove("activeQuestion"); // hide the Question box
+    result_box.classList.remove("activeResult");
 }
 
 
@@ -62,6 +65,12 @@ continue_btn.onclick = () => {
     queCounter(1);
     startTimer(10);
     startTimerLine(0);
+}
+
+// If clear Highscores is clicked
+clear_highscores_btn.onclick = () => {
+    localStorage.clear();
+    highScoresList.innerHTML = "";
 }
 
 // If Go Back Button is clicked
@@ -91,19 +100,27 @@ saveScoreBtn.onclick = (event) => {
     highscore_box.classList.add("activehighScore");
 
     highScoresList.innerHTML = highScores.map(score => {
-        return `<li class="high-score">${score.name} - ${score.score}</li>`;
+        return `<li class="high-score">${score.name} - ${score.score} / ${questions.length}</li>`;
     }).join("");
+
+    que_count = 0;
+    que_num = 1;
+    userScore = 0;
+    showQuestions(que_count);
+    queCounter(que_num);
+
+    username.value = "";
 }
 
 // when replay quiz is clicked
 restart_quiz.onclick= () => {
     question_box.classList.add("activeQuestion");
     result_box.classList.remove("activeResult");
-    let que_count = 0;
-    let que_num = 1;
-    let timeValue = 10;
-    let widthValue = 0;
-    let userScore = 0;
+    que_count = 0;
+    que_num = 1;
+    timeValue = 10;
+    widthValue = 0;
+    userScore = 0;
     showQuestions(que_count);
     queCounter(que_num);
     clearInterval(counter);
